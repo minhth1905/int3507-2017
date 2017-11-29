@@ -14,7 +14,7 @@
 #### I. GIỚI THIỆU CHUNG
 #### 1. Tổng quan về OpenCV
 
-OpenCV (OpenSource Computer Vision) là một thư viện mã nguồn mở, được phát hành theo giấy phép BSD (Berkeley Software Distribution), do đó nó hoàn toàn miễn phí cho cả học thuật và thương mại.
+ OpenCV (OpenSource Computer Vision) là một thư viện mã nguồn mở, được phát hành theo giấy phép BSD (Berkeley Software Distribution), do đó nó hoàn toàn miễn phí cho cả học thuật và thương mại.
 
  Thư viện OpenCV cung cấp cho người dùng các cấu trúc dữ liệu, đối tượng và hàm bằng cách khai báo nguyên mẫu (prototype) của chúng trong các tập tin thư viện C/C++ và định nghĩa chi tiết trong các tập tin mã nguồn. Với mức độ sử dụng OpenCV, ta chỉ cần giải nén các tập tin đã được biên dịch sẵn rồi thực hiện các thao tác cài đặt đường dẫn cho thích hợp để hệ điều hành tìm đến đúng vị trí của các tập tin thư viện. Ở mức độ cao hơn, nếu muốn hiệu chỉnh sửa đổi thuật toán hay sử dụng phần mở rộng của OpenCV ta cần phải biên dịch mã nguồn trực tiếp trên máy trước khi cài đặt. Được viết bằng tối ưu hóa C/C++, thư viện có thể tận dụng lợi thế của xử lý đa lõi. Hiện nay, OpenCV được sử dụng trên khắp thế giới với cộng đồng hơn 47 nghìn người dùng và số lượng download vượt quá 6 triệu lần. Phạm vi sử dụng mở rộng từ nghệ thuật tương tác, cho đến lĩnh vực khai thác mỏ, bản đồ trên web hoặc công nghệ robot.
 
@@ -28,7 +28,7 @@ OpenCV (OpenSource Computer Vision) là một thư viện mã nguồn mở, đư
   5. Objdetect người dùng có thể tìm các đối tượng khác nhau từ các lớp xác định trước (ví dụ xe hơi, khuôn mặt, ánh mắt...)
   6. Highgui được thiết kế để quay video, mã hoá giải mã hình ảnh và video.
 
-- Đọc thêm về  [OpenCV](https://opencv.org/)
+ Đọc thêm về  [OpenCV](https://opencv.org/)
 
 ---
 #### 2. Tổng quan về đề tài và giới thiệu về ứng dụng tạo mã tự động
