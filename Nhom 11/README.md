@@ -17,6 +17,9 @@
 ![OpenCV Logo](https://jayrambhia.files.wordpress.com/2012/06/opencv_hor_900_1.jpg)
 
 
+Hình 1. Logo OpenCV
+
+
 OpenCV (OpenSource Computer Vision) là một thư viện mã nguồn mở, được phát hành theo giấy phép BSD (Berkeley Software Distribution), do đó nó hoàn toàn miễn phí cho cả học thuật và thương mại.
 
 Thư viện OpenCV cung cấp cho người dùng các cấu trúc dữ liệu, đối tượng và hàm bằng cách khai báo nguyên mẫu (prototype) của chúng trong các tập tin thư viện C/C++ và định nghĩa chi tiết trong các tập tin mã nguồn. Với mức độ sử dụng OpenCV, ta chỉ cần giải nén các tập tin đã được biên dịch sẵn rồi thực hiện các thao tác cài đặt đường dẫn cho thích hợp để hệ điều hành tìm đến đúng vị trí của các tập tin thư viện. Ở mức độ cao hơn, nếu muốn hiệu chỉnh sửa đổi thuật toán hay sử dụng phần mở rộng của OpenCV ta cần phải biên dịch mã nguồn trực tiếp trên máy trước khi cài đặt. Được viết bằng tối ưu hóa C/C++, thư viện có thể tận dụng lợi thế của xử lý đa lõi. Hiện nay, OpenCV được sử dụng trên khắp thế giới với cộng đồng hơn 47 nghìn người dùng và số lượng download vượt quá 6 triệu lần. Phạm vi sử dụng mở rộng từ nghệ thuật tương tác, cho đến lĩnh vực khai thác mỏ, bản đồ trên web hoặc công nghệ robot.
@@ -59,6 +62,31 @@ Hiện tại Websocket đã được hỗ trợ trên 74% các trình duyệt. B
 
 
 
+Để thực hiện kết nối, client phải gửi một WebSocket handshake request đến server. Server sẽ gửi trả lại WebSocket handshake response như ví dụ bên dưới:
+
+Client request:
+
+	GET /mychat HTTP/1.1
+	Host: server.example.com
+	Upgrade: websocket
+	Connection: Upgrade
+	Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
+	Sec-WebSocket-Protocol: chat
+	Sec-WebSocket-Version: 13
+	Origin: http://example.com
+
+Server response:(Server Architecture)
+
+	HTTP/1.1 101 Switching Protocols
+	Upgrade: websocket
+	Connection: Upgrade
+	Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
+Để xác nhận việc kết nối, client sẽ gửi một giá trị Sec-WebSocket-Key được mã hóa bằng Based64 đến server. Sau đó bên server sẽ thực hiện:
+– Nối thêm chuỗi cố định là “258EAFA5-E914-47DA-95CA-C5AB0DC85B11″ vào Sec-WebSocket-Key để được chuỗi mới là “x3JJHMbDL1EzLkh9GBhXDw==258EAFA5-E914-47DA-95CA-C5AB0DC85B11″.
+– Thực hiện mã hóa SHA-1 chuỗi trên để được “1d29ab734b0c9585240069a6e4e3e91b61da1969″.
+– Mã hóa kết quả vừa nhận được bằng Base64 để được “HSmrc0sMlYUkAGmm5OPpG2HaGWk=”.
+– Gửi response lại client kèm với giá trị Sec-WebSocket-Accept chính là chuỗi kết quả vừa tạo ra.
+Client sẽ kiểm tra status code (phải bằng 101) và Sec-WebSocket-Accept xem có đúng với kết quả mong đợi không và thực hiện kết nối.
 
 **Ưu điểm:**
 
@@ -91,8 +119,8 @@ Một số đặc điểm nổi bật của Node.js:
  
 ##### c. Socket.io
 
- Socket.IO là một thư viện javascript có mục đích tạo ra các ứng dụng thời gian thực trên trình duyệt cũng như thiết bị di động. Việc sử dụng thư viện này cũng rất đơn giản và giống nhau ở cả server lẫn client. 
- Thư viện này gồm 2 phần:
+Socket.IO là một thư viện javascript có mục đích tạo ra các ứng dụng thời gian thực trên trình duyệt cũng như thiết bị di động. Việc sử dụng thư viện này cũng rất đơn giản và giống nhau ở cả server lẫn client. 
+Thư viện này gồm 2 phần:
 
 	1. Phía client: gồm bộ thư viện viết cho web (JavaScript), IOS, Android.
 
@@ -108,25 +136,28 @@ Một số đặc điểm nổi bật của Node.js:
 
 	4. off(event_name): ngừng lắng nghe một sự kiện nào đó
 
-- Tìm hiểu thêm tại trang [manual](https://socket.io/#how-to-use)
+Tìm hiểu thêm tại trang [manual](https://socket.io/#how-to-use)
 
 ##### d. JNI
 
 Ví dụ về cấu trúc của một Class JNI:
 
-![img000](http://vietgamedev.net/file/attachment/2013/08/276f80e2cb29445c46c18d07132d91da_view.png)
+	![img000](http://vietgamedev.net/file/attachment/2013/08/276f80e2cb29445c46c18d07132d91da_view.png)
 
 
 
+Hình 2. Cấu trúc Class JNI
 
 JNI (Java Native Interface) là một framework cho phép gọi các hàm Java trong JVM từ các ngôn ngữ cấp thấp như C, C++ hay assembly. Nói nôm na dễ hiểu là mình muốn gọi Java từ C++ thì mình sẽ gọi thông qua JNI. Ta thường dùng JNI khi muốn gọi các phương thức đặc trưng của Android như: gửi tin nhắn, thực hiện cuộc gọi... JniHelper class là lớp singleton cocos2d-x cung cấp để hỗ trợ việc sử dụng JNI một cách dễ dàng hơn. Ta sẽ dùng lớp này để thực hiện các lệnh gọi Java từ C++.
 
 **Vai trò của JNI**
+
 	- Khi một môi trường Java được cài trên một hệ điều hành, sẽ có trường hợp người lập trình muốn sử dụng các thư viện của riêng hệ điều hành đó. Lý do là vì dùng thư viện của riêng hệ điều hành sẽ nhanh hơn, hiệu suất cao hơn.
 	- Ngoài ra đối với hệ điều hành Windows thì số lượng các thư viện do cộng đồng viết ra rất nhiều, và có một số thư viện cực kỳ đồ sộ, việc viết lại các thư viện này bằng ngôn ngữ Java sẽ mất nhiều thời gian hơn so với việc tìm cách sử dụng chúng từ Java.
 	- JNI là một tính năng cực kỳ mạnh mẽ cho phép chúng ta sử dụng code từ các ngôn ngữ khác, JNI có tính chất 2 chiều, tức là code từ các ngôn ngữ khác cũng có thể gọi lại code từ Java nữa.
 
 **Nhược điểm**
+
 	- Chúng ta đã biết rằng Java là một ngôn ngữ viêt một lần-chạy mọi nơi, tức là chỉ cần viết code Java, sau đó biên dịch rồi đem lên một hệ điều hành có cài JVM là có thể chạy bình thường. Tuy nhiên khi chúng ta sử dụng JNI để “hợp tác” với code của hệ điều hành, thì lại không thể đem chương trình đó đi chạy trên máy có hệ điều hành khác được, do đó mất đi tính viết một lần-chạy mọi nơi.
 	- Một điều nữa là Java có tính năng type-safe, tức là bạn khai báo kiểu dữ liệu gì thì chỉ được thao tác với kiểu dữ liệu đó, nhưng các ngôn ngữ hệ điều hành thì có thể không có tính năng type-safe, do đó khi viết code JNI bạn sẽ phải chú ý cẩn thận, chỉ cần khác kiểu dữ liệu cũng có thể crash chương trình.
 
@@ -150,7 +181,7 @@ Hình ảnh ví dụ về mã ArUco:
 
 
 
-*Mã ArUco*
+Hình 3. Mã ArUco
 
 ##### b. Từ điển
 
@@ -186,7 +217,7 @@ Hình ảnh mã được tạo:
 ![img02](https://docs.opencv.org/3.1.0/marker23.jpg)
 
 
-*Mã được tạo*
+Hình 4. Mã được tạo
 
 ---
 #### III. THUẬT TOÁN NHẬN DẠNG MÃ
@@ -208,19 +239,20 @@ Xem xét hình ảnh sau:
 ![img03](https://docs.opencv.org/3.1.0/singlemarkersoriginal.png)
 
 
-*Hình ảnh gốc với các mã*
+
+Hình 5. Ảnh gốc chứa các mã
 
  Đây là mã được phát hiện (màu xanh lá cây):
 ![img04](https://docs.opencv.org/3.1.0/singlemarkersdetection.png)
 
 
-*Hình ảnh có mã đã phát hiện*
+Hình 6. Ảnh chứa mã đã phát hiện
 
 Và đây là những đối tượng đã bị loại bỏ trong bước nhận dạng (màu hồng):
 ![img05](https://docs.opencv.org/3.1.0/singlemarkersrejected.png)
 
 
-*Hình ảnh với đối tượng bị loại bỏ*
+Hình 7.  Ảnh chứa các đối tượng bị loại bỏ
 
 Trong module ArUco, việc phát hiện mã được thực hiện bởi hàm detectMarkers(). Đây là chức năng quan trọng nhất trong module, vì tất cả các phần còn lại của các chức năng được dựa trên các dấu hiệu phát hiện trước đó được trả về bởi detectMarkers().
 Một ví dụ về phát hiện mã:
@@ -259,7 +291,7 @@ Xem ví vụ sau:
 ![img06](https://docs.opencv.org/3.1.0/singlemarkersrejected.png)
 
 
-*Hình ảnh có mã đã phát hiện*
+Hình 8. Ảnh có mã được phát hiện
 
 Chú ý rằng chức năng này chỉ được cung cấp cho việc hình dung mã và việc sử dụng nó có thể được bỏ qua hoàn toàn. Với hai chức năng này, chúng ta có thể tạo ra một vòng lặp dò tìm cơ bản để phát hiện các mã từ máy ảnh.
 
@@ -289,7 +321,7 @@ Hệ tọa độ mã được giả định bởi chức năng này được đ�
 
 
 
-*Hình ảnh các mã được gắn với trục tọa độ*
+Hình 9. Ảnh các mã được gắn với trục tọa độ
 
 Module ArUco cung cấp một chức năng để vẽ trục như trong hình trên, vì vậy có thể kiểm tra việc đánh giá.
 Xét ví dụ:
@@ -363,9 +395,9 @@ Ví dụ về phân đoạn cho hình ảnh mẫu được sử dụng ở trên
 ![img08](https://docs.opencv.org/3.1.0/singlemarkersthresh.png)
 
 
-*Hình ảnh đã phân đoạn*
+Hình 10.  Ảnh đã phân đoạn
 
-- Phân đoạn ảnh này có thể được tùy chỉnh bằng các tham số sau: int adaptiveThreshWinSizeMin, int adaptiveThreshWinSizeMax, int adaptiveThreshWinSizeStep
+Phân đoạn ảnh này có thể được tùy chỉnh bằng các tham số sau: int adaptiveThreshWinSizeMin, int adaptiveThreshWinSizeMax, int adaptiveThreshWinSizeStep
 
   - Các tham số adaptiveThreshWinSizeMin và adaptiveThreshWinSizeMax đặc trưng cho khoảng không gian kích thước cửa sổ (tính bằng pixel) được chọn cho phân đoạn thích ứng.
 
@@ -379,7 +411,7 @@ Giá trị kích thước cửa sổ thấp có thể 'phá vỡ' đường vi�
 ![img09](https://docs.opencv.org/3.1.0/singlemarkersbrokenthresh.png)
 
 
-*Ảnh mã bị hỏng*
+Hình 11. Ảnh mã bị hỏng
 
 Mặt khác, giá trị quá cao có thể tạo ra hiệu quả tương tự nếu các mã quá nhỏ và nó cũng có thể làm giảm hiệu suất. Hơn nữa quá trình này có xu hướng giảm phân đoạn toàn cầu, mất đi các lợi ích thích ứng.
 Trường hợp đơn giản nhất sử dụng cùng một giá trị cho adaptiveThreshWinSizeMin và adaptiveThreshWinSizeMax, tạo ra một giá trị phân đoạn duy nhất. Tuy nhiên, cách tốt hơn đó là sử dụng một loạt các giá trị cho kích thước cửa sổ, mặc dù nhiều giá trị phân đoạn cũng có thể làm giảm hiệu suất đáng kể.
@@ -425,14 +457,14 @@ Sau khi nhận dạng đối tượng, các bit của mỗi đối tượng sẽ
 ![img10](https://docs.opencv.org/3.1.0/removeperspective.png)
 
 
-*Thay đổi phối cảnh*
+Hình 12. Thay đổi phối cảnh
 
 Sau đó, hình ảnh được chia thành lưới có cùng số ô so với số bit trong mã. Trên mỗi ô, số lượng điểm ảnh màu đen và trắng được tính để quyết định bit được gán cho ô nào (từ giá trị lớn) :
 
 ![img11](https://docs.opencv.org/3.1.0/bitsextraction1.png)
 
 
-*Các ô được đánh dấu*
+Hình 13. Các ô được đánh dấu
 
 Một vài tham số có thể tùy chỉnh quá trình này:
   - int markerBorderBits
@@ -454,7 +486,7 @@ Một vài tham số có thể tùy chỉnh quá trình này:
 ![img12](https://docs.opencv.org/3.1.0/bitsextraction2.png)
 
 
-*Viền các ô được đánh dấu*
+Hình 14. Viền các ô được đánh dấu
 
 Chỉ các pixel bên trong các ô vuông màu xanh lá cây được xem xét.
 
@@ -503,7 +535,7 @@ Sau khi các mã đã được phát hiện và xác định, bước cuối cù
 
 
 
-*Màn hình đăng nhập*
+Hình 15. Màn hình đăng nhập
 
 - Sau khi đăng nhập thành công, màn hình chính sẽ hiển thị như hình ảnh dưới đây:
 
@@ -511,7 +543,7 @@ Sau khi các mã đã được phát hiện và xác định, bước cuối cù
 
 
 
-*Màn hình chính*
+Hình 16. Màn hình chính
 
 - Khi bạn ấn vào nút SCAN, camera sẽ hiển thị, bắt đầu quét các mã trong không gian và nhận dạng chúng.
 
@@ -519,7 +551,7 @@ Sau khi các mã đã được phát hiện và xác định, bước cuối cù
 
 
 
-*Màn hình camera*
+Hình 17. Màn hình camera hiển thị kết quả.
 
 - Trên màn hình thiết bị sẽ hiển thị các kết quả như hình trên.
 
