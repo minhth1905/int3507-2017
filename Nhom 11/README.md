@@ -57,7 +57,7 @@ Quy mô trong môn học: ứng dụng cho phép tự động sinh ra các mã �
 WebSocket là công nghệ hỗ trợ giao tiếp hai chiều giữa client và server bằng cách sử dụng một TCP socket (cổng 80 và 443) để tạo một kết nối hiệu quả và ít tốn kém. Theo phân tích từ [websocket.org](http://websocket.org/quantum.html), WebSockets có thể giảm kích thước của HTTP header lên đến 500 – 1000 lần, giảm độ trễ của network lên đến 3 lần. Do đó, hỗ trợ tốt hơn đối với các ứng dụng web apps real – time. WebSockets mới xuất hiện trong HTML5, là một kỹ thuật [Reverse Ajax](http://directwebremoting.org/dwr/documentation/reverse-ajax/index.html). Kết nối được mở thông qua một HTTP request (yêu cầu HTTP), được gọi là liên kết WebSockets với những header đặc biệt. Kết nối được duy trì để bạn có thể viết và nhận dữ liệu bằng JavaScript như khi bạn đang sử dụng một TCP socket đơn thuần.
 
 Hiện tại Websocket đã được hỗ trợ trên 74% các trình duyệt. Bạn có thể xem số liệu mới nhất tại [đây](https://caniuse.com/#search=websocket)
-- Giao thức bắt tay của WebSocket:
+Giao thức bắt tay của WebSocket:
 ![img00](https://poesiabinaria.net/wp-content/uploads/2016/10/WebSockets-Diagram.png)
 
 
@@ -82,10 +82,10 @@ Server response:(Server Architecture)
 	Connection: Upgrade
 	Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
 Để xác nhận việc kết nối, client sẽ gửi một giá trị Sec-WebSocket-Key được mã hóa bằng Based64 đến server. Sau đó bên server sẽ thực hiện:
-– Nối thêm chuỗi cố định là “258EAFA5-E914-47DA-95CA-C5AB0DC85B11″ vào Sec-WebSocket-Key để được chuỗi mới là “x3JJHMbDL1EzLkh9GBhXDw==258EAFA5-E914-47DA-95CA-C5AB0DC85B11″.
-– Thực hiện mã hóa SHA-1 chuỗi trên để được “1d29ab734b0c9585240069a6e4e3e91b61da1969″.
-– Mã hóa kết quả vừa nhận được bằng Base64 để được “HSmrc0sMlYUkAGmm5OPpG2HaGWk=”.
-– Gửi response lại client kèm với giá trị Sec-WebSocket-Accept chính là chuỗi kết quả vừa tạo ra.
+- Nối thêm chuỗi cố định là “258EAFA5-E914-47DA-95CA-C5AB0DC85B11″ vào Sec-WebSocket-Key để được chuỗi mới là “x3JJHMbDL1EzLkh9GBhXDw==258EAFA5-E914-47DA-95CA-C5AB0DC85B11″.
+- Thực hiện mã hóa SHA-1 chuỗi trên để được “1d29ab734b0c9585240069a6e4e3e91b61da1969″.
+-  Mã hóa kết quả vừa nhận được bằng Base64 để được “HSmrc0sMlYUkAGmm5OPpG2HaGWk=”.
+- Gửi response lại client kèm với giá trị Sec-WebSocket-Accept chính là chuỗi kết quả vừa tạo ra.
 Client sẽ kiểm tra status code (phải bằng 101) và Sec-WebSocket-Accept xem có đúng với kết quả mong đợi không và thực hiện kết nối.
 
 **Ưu điểm:**
@@ -99,7 +99,7 @@ Client sẽ kiểm tra status code (phải bằng 101) và Sec-WebSocket-Accept 
 	- Chưa hỗ trợ được tất cả các trình duyệt.
 	- Không có phạm vi yêu cầu nào. Do WebSockets là một TCP socket chứ không phải là HTTP request, nên không dễ sử dụng các dịch vụ có phạm vi yêu cầu.
 
-- Tìm hiểu thêm về [Websocket](http://www.developerfusion.com/article/143158/an-introduction-to-websockets/)
+Tìm hiểu thêm về [Websocket](http://www.developerfusion.com/article/143158/an-introduction-to-websockets/)
 
 ##### b. Node.js
 
