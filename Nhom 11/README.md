@@ -57,6 +57,7 @@ Quy mô trong môn học: ứng dụng cho phép tự động sinh ra các mã �
 WebSocket là công nghệ hỗ trợ giao tiếp hai chiều giữa client và server bằng cách sử dụng một TCP socket (cổng 80 và 443) để tạo một kết nối hiệu quả và ít tốn kém. Theo phân tích từ [websocket.org](http://websocket.org/quantum.html), WebSockets có thể giảm kích thước của HTTP header lên đến 500 – 1000 lần, giảm độ trễ của network lên đến 3 lần. Do đó, hỗ trợ tốt hơn đối với các ứng dụng web apps real – time. WebSockets mới xuất hiện trong HTML5, là một kỹ thuật [Reverse Ajax](http://directwebremoting.org/dwr/documentation/reverse-ajax/index.html). Kết nối được mở thông qua một HTTP request (yêu cầu HTTP), được gọi là liên kết WebSockets với những header đặc biệt. Kết nối được duy trì để bạn có thể viết và nhận dữ liệu bằng JavaScript như khi bạn đang sử dụng một TCP socket đơn thuần.
 
 Hiện tại Websocket đã được hỗ trợ trên 74% các trình duyệt. Bạn có thể xem số liệu mới nhất tại [đây](https://caniuse.com/#search=websocket)
+
 Giao thức bắt tay của WebSocket:
 ![img00](https://poesiabinaria.net/wp-content/uploads/2016/10/WebSockets-Diagram.png)
 
@@ -142,7 +143,7 @@ Tìm hiểu thêm tại trang [manual](https://socket.io/#how-to-use)
 
 Ví dụ về cấu trúc của một Class JNI:
 
-	![img000](http://vietgamedev.net/file/attachment/2013/08/276f80e2cb29445c46c18d07132d91da_view.png)
+![img000](http://vietgamedev.net/file/attachment/2013/08/276f80e2cb29445c46c18d07132d91da_view.png)
 
 
 
@@ -344,36 +345,39 @@ Module ArUco cung cấp lớp Dictionary là lớp đại diện cho từ điể
 Ngoài kích thước của mã và số lượng mã trong từ điển, có một tham số quan trọng nữa đó là khoảng cách giữa hai mã. Khoảng cách giữa hai mã là khoảng cách tối thiểu giữa các dấu hiệu của nó và nó sẽ xác định khả năng phát hiện và sửa chữa các lỗi của từ điển. Nói chung, kích thước từ điển và kích thước mã cao hơn làm tăng khoảng cách giữa các mã và ngược lại. Tuy nhiên, việc phát hiện các mã với kích thước lớn hơn là phức tạp hơn, do số lượng bit cao hơn cần phải được chiết xuất từ hình ảnh. Ví dụ, nếu bạn chỉ cần 10 mã trong ứng dụng của bạn, tốt hơn là sử dụng một từ điển chỉ gồm có 10 mã hơn là sử dụng một từ điển gồm có 1000 mã. Lý do là từ điển gồm 10 mã phân cách sẽ có khoảng cách giữa các điểm đánh dấu cao hơn và, do đó, nó sẽ mạnh mẽ hơn đối với các lỗi.
 
 Module ArUco cung cấp một số lựa chọn từ điển sau:
-  1. Từ điển được xác định trước
 
-  - Đây là cách dễ nhất để chọn một từ điển. Module aruco chứa một tập các từ điển được xác định trước của một loạt các kích thước mã và số lượng mã.
-  - Ví dụ:
+##### a. Từ điển được xác định trước
 
- 		**c++cv::aruco::Dictionary  dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_6X6_250);**
+Đây là cách dễ nhất để chọn một từ điển. Module aruco chứa một tập các từ điển được xác định trước của một loạt các kích thước mã và số lượng mã.
+Ví dụ:
 
-  - Với DICT_6X6_250 là một ví dụ về từ điển được xác định trước với 6x6 bits và tổng cộng là 250 mã.
-  - Từ tất cả các từ điển được cung cấp, bạn nên chọn một trong những từ điển nhỏ hơn phù hợp với ứng dụng của mình. Từ điển càng nhỏ thì khoảng cách giữa các mã càng cao.
-  2. Thế hệ từ điển tự động
+	**c++cv::aruco::Dictionary  dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_6X6_250);**
 
-  - Từ điển có thể được tạo ra tự động để điều chỉnh theo số lượng các mã và bit cần thiết để khoảng cách giữa các mã được tối ưu hóa.
-  - Ví dụ:
+Với DICT_6X6_250 là một ví dụ về từ điển được xác định trước với 6x6 bits và tổng cộng là 250 mã.
+Từ tất cả các từ điển được cung cấp, bạn nên chọn một trong những từ điển nhỏ hơn phù hợp với ứng dụng của mình. Từ điển càng nhỏ thì khoảng cách giữa các mã càng cao.
 
-    	**c++cv::aruco::Dictionary  dictionary= cv::aruco::generateCustomDictionary(36, 5);**
+##### b. Thế hệ từ điển tự động
 
-  - Thao tác này sẽ tạo một từ điển tùy chỉnh gồm 36 mã của 5x5 bits. Quá trình này có thể mất vài giây, tùy thuộc vào các tham số (nó chậm hơn cho các từ điển lớn hơn và số bit cao hơn)
-  3. Thế hệ từ điển tự tạo
+Từ điển có thể được tạo ra tự động để điều chỉnh theo số lượng các mã và bit cần thiết để khoảng cách giữa các mã được tối ưu hóa.
+Ví dụ:
 
-  - Cuối cùng, từ điển có thể được cấu hình bằng tay, do đó bất kỳ mã hóa có thể được sử dụng. Để làm điều đó, các tham số đối tượng Dictionary cần được gán bằng tay. Cần lưu ý rằng, trừ khi bạn có một lý do đặc biệt để làm điều này bằng tay, tốt hơn là sử dụng một trong những lựa chọn trước đó.
-  - Ví dụ:
+    **c++cv::aruco::Dictionary  dictionary= cv::aruco::generateCustomDictionary(36, 5);**
 
-    	**c++ class Dictionary { public: Mat bytesList; int markerSize; int maxCorrectionBits;**
+Thao tác này sẽ tạo một từ điển tùy chỉnh gồm 36 mã của 5x5 bits. Quá trình này có thể mất vài giây, tùy thuộc vào các tham số (nó chậm hơn cho các từ điển lớn hơn và số bit cao hơn)
 
-  - Các tham số:
+##### c. Thế hệ từ điển tự tạo
+
+Cuối cùng, từ điển có thể được cấu hình bằng tay, do đó bất kỳ mã hóa có thể được sử dụng. Để làm điều đó, các tham số đối tượng Dictionary cần được gán bằng tay. Cần lưu ý rằng, trừ khi bạn có một lý do đặc biệt để làm điều này bằng tay, tốt hơn là sử dụng một trong những lựa chọn trước đó.
+Ví dụ:
+
+    **c++ class Dictionary { public: Mat bytesList; int markerSize; int maxCorrectionBits;**
+
+Các tham số:
     - bytesList là mảng có chứa tất cả thông tin về mã code.
     - markerSize là kích thước của mỗi mã (ví dụ, 5 cho các mã với kích thước 5x5 bits)
     - maxCorrectionBits là số bit sai lệch tối đa có thể được sửa chữa trong quá trình phát hiện mã. Nếu giá trị này quá cao, nó có thể dẫn đến một số lượng lớn các sai phạm lớn.
-  - Mỗi hàng trong bytesList đại diện cho một trong các mã từ điển. Tuy nhiên, các mã không được lưu trữ ở dạng nhị phân của nó, thay vào đó chúng được lưu trữ ở một định dạng đặc biệt để đơn giản hóa phát hiện của chúng, sử dụng phương pháp tĩnh Dictionary::getByteListFromBits() để làm điều này.
-  - Ví dụ:
+Mỗi hàng trong bytesList đại diện cho một trong các mã từ điển. Tuy nhiên, các mã không được lưu trữ ở dạng nhị phân của nó, thay vào đó chúng được lưu trữ ở một định dạng đặc biệt để đơn giản hóa phát hiện của chúng, sử dụng phương pháp tĩnh Dictionary::getByteListFromBits() để làm điều này.
+Ví dụ:
 
 	    **c++ Dictionary dictionary;**
 
