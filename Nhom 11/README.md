@@ -373,9 +373,9 @@ Ví dụ:
     **c++ class Dictionary { public: Mat bytesList; int markerSize; int maxCorrectionBits;**
 
 Các tham số:
-    - bytesList là mảng có chứa tất cả thông tin về mã code.
-    - markerSize là kích thước của mỗi mã (ví dụ, 5 cho các mã với kích thước 5x5 bits)
-    - maxCorrectionBits là số bit sai lệch tối đa có thể được sửa chữa trong quá trình phát hiện mã. Nếu giá trị này quá cao, nó có thể dẫn đến một số lượng lớn các sai phạm lớn.
+- bytesList là mảng có chứa tất cả thông tin về mã code.
+- markerSize là kích thước của mỗi mã (ví dụ, 5 cho các mã với kích thước 5x5 bits)
+- maxCorrectionBits là số bit sai lệch tối đa có thể được sửa chữa trong quá trình phát hiện mã. Nếu giá trị này quá cao, nó có thể dẫn đến một số lượng lớn các sai phạm lớn.
 Mỗi hàng trong bytesList đại diện cho một trong các mã từ điển. Tuy nhiên, các mã không được lưu trữ ở dạng nhị phân của nó, thay vào đó chúng được lưu trữ ở một định dạng đặc biệt để đơn giản hóa phát hiện của chúng, sử dụng phương pháp tĩnh Dictionary::getByteListFromBits() để làm điều này.
 Ví dụ:
 
