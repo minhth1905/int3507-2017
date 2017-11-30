@@ -302,6 +302,7 @@ Chú ý rằng chức năng này chỉ được cung cấp cho việc hình dung
 Để thực hiện ước lượng hình dáng mã, bạn cần phải biết các thông số hiệu chuẩn trên máy ảnh của bạn. Đó là ma trận máy ảnh và các hệ số biến dạng. OpenCV cung cấp chức năng calibrateCamera() và hướng dẫn Calibration để hiệu chuẩn máy ảnh. Bạn cũng có thể hiệu chuẩn máy ảnh của bạn bằng cách sử dụng module Aruco. Lưu ý rằng điều này chỉ cần được thực hiện một lần trừ khi các ống kính máy ảnh được sửa đổi.
 Cuối cùng, những gì bạn nhận được sau khi hiệu chuẩn là ma trận máy ảnh: một ma trận 3x3 với khoảng cách tiêu cự và tọa độ trung tâm của máy ảnh (còn gọi là các tham số nội tại) và hệ số biến dạng: một vector gồm 5 phần tử  hoặc nhiều hơn, đó là mô hình sự biến dạng được tạo ra bởi máy ảnh của bạn.
 Khi ước lượng hình dáng tập các mã ArUco, bạn có thể ước tính hình dáng của mỗi mã riêng lẻ, bằng cách sử dụng các bảng aruco. Máy ảnh đặt ra đối với một mã là sự chuyển đổi 3d từ hệ tọa độ của mã sang hệ toạ độ máy ảnh. Nó được chỉ định bởi phép quay và một vector dịch.
+
 Module ArUco cung cấp một chức năng để ước lượng các vị trí của tất cả các dấu hiệu đã phát hiện:
 
 	  **c++ Mat cameraMatrix, distCoeffs;**
@@ -376,6 +377,7 @@ Các tham số:
 - bytesList là mảng có chứa tất cả thông tin về mã code.
 - markerSize là kích thước của mỗi mã (ví dụ, 5 cho các mã với kích thước 5x5 bits)
 - maxCorrectionBits là số bit sai lệch tối đa có thể được sửa chữa trong quá trình phát hiện mã. Nếu giá trị này quá cao, nó có thể dẫn đến một số lượng lớn các sai phạm lớn.
+
 Mỗi hàng trong bytesList đại diện cho một trong các mã từ điển. Tuy nhiên, các mã không được lưu trữ ở dạng nhị phân của nó, thay vào đó chúng được lưu trữ ở một định dạng đặc biệt để đơn giản hóa phát hiện của chúng, sử dụng phương pháp tĩnh Dictionary::getByteListFromBits() để làm điều này.
 Ví dụ:
 
@@ -394,6 +396,7 @@ Các tham số được phân loại tùy thuộc vào quá trình mà chúng th
 ##### a. Phân đoạn ảnh
 
 Một trong những bước đầu tiên của quá trình nhận dạng mã là phân đoạn thích nghi hình ảnh đầu vào. Phương thức này tính giá trị trung bình của các n điểm xung quanh pixel đó rồi trừ cho C chứ không lấy ngưỡng cố định (n thường là số lẻ, còn C là số nguyên bất kỳ)
+
 Ví dụ về phân đoạn cho hình ảnh mẫu được sử dụng ở trên là:
 
 ![img08](https://docs.opencv.org/3.1.0/singlemarkersthresh.png)
@@ -431,7 +434,7 @@ Sau khi phân đoạn ảnh, đường viền được nhận diện. Tuy nhiên
 
 Tất cả các đường viền được xem xét và sẽ được xử lý trong các giai đoạn sau, mất chi phí tính toán cao hơn. Vì vậy, việc loại bỏ các đối tượng sai trong giai đoạn này là thích hợp hơn trong giai đoạn sau. Mặt khác, nếu các điều kiện lọc quá chặt chẽ, các đường viền  thực của mã có thể bị loại bỏ, và do đó không được phát hiện.
 
-Tham số double minMarkerPerimeterRate , double maxMarkerPerimeterRate xác định kích thước tối thiểu và tối đa của một mã, cụ thể là chu vi tối đa và tối thiểu của mã. Chúng không được chỉ định trong các giá trị pixel tuyệt đối, thay vào đó chúng được chỉ định tương đối so với kích thước tối đa của hình ảnh đầu vào.\
+Tham số double minMarkerPerimeterRate , double maxMarkerPerimeterRate xác định kích thước tối thiểu và tối đa của một mã, cụ thể là chu vi tối đa và tối thiểu của mã. Chúng không được chỉ định trong các giá trị pixel tuyệt đối, thay vào đó chúng được chỉ định tương đối so với kích thước tối đa của hình ảnh đầu vào.
 
 Ví dụ, một hình ảnh có kích thước 640x480 và một mã có  chu vi tương đối nhỏ 0.05 sẽ dẫn đến một mã có chu vi tối thiểu là 640x0.05 = 32 pixel, vì 640 là chiều tối đa của hình ảnh. Tương tự áp dụng cho tham số maxMarkerPerimeterRate. Giá trị minMarkerPerimeterRate: 0 và giá trị maxMarkerPerimeterRate : 4 (hoặc nhiều hơn) sẽ tương đương với việc xem xét tất cả các đường viền trong hình ảnh, tuy nhiên điều này không được khuyến khích vì các lý do hiệu suất.
 
